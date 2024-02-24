@@ -8,19 +8,21 @@ import (
 )
 
 type BoardDimension struct {
-	ROW int
-	COL int
+	ROW      int
+	COL      int
+	rowColor color.Color
+	colColor color.Color
 }
 
-func (inf BoardDimension) drawSquars(screen *ebiten.Image, rowColor, colColor color.Color) {
+func (inf BoardDimension) drawSquars(screen *ebiten.Image) {
 	screenWidth, screenHeight := screen.Size()
 	squareSize := int(math.Min(float64(screenWidth)/float64(inf.COL), float64(screenHeight)/float64(inf.ROW)))
 
 	rowSq := ebiten.NewImage(squareSize, squareSize)
 	colSq := ebiten.NewImage(squareSize, squareSize)
 
-	rowSq.Fill(rowColor)
-	colSq.Fill(colColor)
+	rowSq.Fill(inf.rowColor)
+	colSq.Fill(inf.colColor)
 
 	opts := &ebiten.DrawImageOptions{}
 

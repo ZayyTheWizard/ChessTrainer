@@ -15,8 +15,10 @@ type Game struct {
 
 var (
 	board = BoardDimension{
-		ROW: 8,
-		COL: 8,
+		ROW:      8,
+		COL:      8,
+		rowColor: color.RGBA{R: 255, G: 0, B: 0, A: 255},
+		colColor: color.RGBA{R: 0, G: 255, B: 0, A: 255},
 	}
 )
 
@@ -26,7 +28,7 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	ebitenutil.DebugPrint(screen, "Hello World!")
-	board.drawSquars(screen, color.RGBA{R: 255, G: 0, B: 0, A: 255}, color.RGBA{R: 0, G: 255, B: 0, A: 255})
+	board.drawSquars(screen)
 }
 
 func (g *Game) Layout(OutsideWidth, OutsideHeight int) (screenWidth, screenHeight int) {
