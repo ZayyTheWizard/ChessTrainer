@@ -17,8 +17,18 @@ var (
 	board = BoardDimension{
 		ROW:      8,
 		COL:      8,
-		rowColor: color.RGBA{R: 255, G: 0, B: 0, A: 255},
-		colColor: color.RGBA{R: 0, G: 255, B: 0, A: 255},
+		rowColor: color.RGBA{R: 101, G: 67, B: 33, A: 255},
+		colColor: color.RGBA{R: 255, G: 239, B: 215, A: 255},
+		consoleRepresentation: [64]PieceDescription{
+			{PieceName: Rook, color: "black"}, {PieceName: Knight, color: "black"}, {PieceName: Bishop, color: "black"}, {PieceName: Queen, color: "black"}, {PieceName: King, color: "black"}, {PieceName: Bishop, color: "black"}, {PieceName: Knight, color: "black"}, {PieceName: Rook, color: "black"},
+			{PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"}, {PieceName: Pawn, color: "black"},
+			{}, {}, {}, {}, {}, {}, {}, {},
+			{}, {}, {}, {}, {}, {}, {}, {},
+			{}, {}, {}, {}, {}, {}, {}, {},
+			{}, {}, {}, {}, {}, {}, {}, {},
+			{PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"}, {PieceName: Pawn, color: "white"},
+			{PieceName: Rook, color: "white"}, {PieceName: Knight, color: "white"}, {PieceName: Bishop, color: "white"}, {PieceName: Queen, color: "white"}, {PieceName: King, color: "white"}, {PieceName: Bishop, color: "white"}, {PieceName: Knight, color: "white"}, {PieceName: Rook, color: "white"},
+		},
 	}
 )
 
@@ -28,7 +38,8 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	ebitenutil.DebugPrint(screen, "Hello World!")
-	board.drawSquars(screen)
+	// I want to draw the peices in their correct spot DrawPeices(screen)
+	board.drawSquares(screen)
 }
 
 func (g *Game) Layout(OutsideWidth, OutsideHeight int) (screenWidth, screenHeight int) {

@@ -1,47 +1,39 @@
 package gamemain
 
-import "github.com/hajimehoshi/ebiten/v2"
+import "log"
 
-/*
-Need a struct for each peice for rowPos, colPos, and importanceVal for
-future AI built on top of it.
-*/
+type PieceType int
 
-func UpdatePeices() error {
-	return nil
+const (
+	Pawn   PieceType = 1
+	Bishop           = 2
+	Rook             = 3
+	Knight           = 4
+	Queen            = 5
+	King             = 6
+)
+
+type PieceDescription struct {
+	PieceName PieceType
+	color     string
 }
 
-func DrawPeices(screen *ebiten.Image) {
-
-}
-
-type pawn struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
-}
-type king struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
-}
-type bishop struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
-}
-type knight struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
-}
-type rook struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
-}
-type queen struct {
-	rowPos int
-	colPos int
-	imVal  int // Value of Importance
+func (p PieceType) peices() string {
+	switch p {
+	case Pawn:
+		return "pawn"
+	case Bishop:
+		return "bishop"
+	case Rook:
+		return "rook"
+	case Knight:
+		return "knight"
+	case Queen:
+		return "queen"
+	case King:
+		return "king"
+	default:
+		log.Fatalf("Invalid peice type")
+		return ""
+	}
 }
