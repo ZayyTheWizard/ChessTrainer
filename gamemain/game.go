@@ -6,7 +6,6 @@ import (
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 type Game struct {
@@ -33,13 +32,12 @@ var (
 )
 
 func (g *Game) Update() error {
+
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	ebitenutil.DebugPrint(screen, "Hello World!")
-	// I want to draw the peices in their correct spot DrawPeices(screen)
-	board.drawSquares(screen)
+	board.drawBoard(screen)
 }
 
 func (g *Game) Layout(OutsideWidth, OutsideHeight int) (screenWidth, screenHeight int) {
@@ -48,7 +46,7 @@ func (g *Game) Layout(OutsideWidth, OutsideHeight int) (screenWidth, screenHeigh
 
 func Start() {
 	ebiten.SetWindowSize(1280, 1280)
-	ebiten.SetWindowTitle("Hello, World!")
+	ebiten.SetWindowTitle("Chess")
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
 	}
