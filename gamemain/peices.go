@@ -11,11 +11,11 @@ type PieceType int
 
 const (
 	Pawn   PieceType = 1
-	Bishop           = 2
-	Rook             = 3
-	Knight           = 4
-	Queen            = 5
-	King             = 6
+	Bishop PieceType = 2
+	Rook   PieceType = 3
+	Knight PieceType = 4
+	Queen  PieceType = 5
+	King   PieceType = 6
 )
 
 type PieceDescription struct {

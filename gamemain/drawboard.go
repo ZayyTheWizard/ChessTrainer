@@ -1,6 +1,7 @@
 package gamemain
 
 import (
+	"fmt"
 	"image/color"
 	"math"
 
@@ -15,12 +16,21 @@ type BoardDimension struct {
 	consoleRepresentation [64]PieceDescription
 }
 
-func (inf *BoardDimension) updateBoard() error {
+var (
+	row, col     int
+	currentPiece = selectedPiece{}
+)
 
+func (inf *BoardDimension) updateBoard(screen *ebiten.Image) error {
+	row, col = inf.mouseLoc(screen)
+	inf.gameLogic(screen, &currentPiece)
 	return nil
 }
 
-func (inf BoardDimension) drawBoard(screen *ebiten.Image) {
+func (inf *BoardDimension) drawBoard(screen *ebiten.Image) {
+	inf.updateBoard(screen)
+	inf.updateCurrentPiece(row, col, &currentPiece)
+
 	screenWidth, screenHeight := screen.Bounds().Dx(), screen.Bounds().Dy()
 	squareSize := int(math.Min(float64(screenWidth)/float64(inf.COL), float64(screenHeight)/float64(inf.ROW)))
 
@@ -55,7 +65,5 @@ func (inf BoardDimension) drawBoard(screen *ebiten.Image) {
 
 		}
 	}
-
-	row, col := inf.mouseLoc(screen)
-	inf.highlightPiece(screen, row, col)
+	fmt.Println(currentPiece)
 }

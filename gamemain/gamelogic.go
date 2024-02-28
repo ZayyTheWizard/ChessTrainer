@@ -114,3 +114,63 @@ var (
 type RowCol struct {
 	row, col int
 }
+
+func (inf *BoardDimension) gameLogic(screen *ebiten.Image, s *selectedPiece) {
+	inf.movePawn(screen, s)
+}
+
+func (inf *BoardDimension) movePawn(screen *ebiten.Image, s *selectedPiece) {
+	var row, col = inf.mouseLoc(screen)
+	/*
+		1. Check who move it is White or black
+		2. Check if king is in check
+	*/
+	if s.row == 6 || s.row == 1 { // If it is the Pawn's first move it can move the 1 or 2 squares foward
+		if s.color == "white" && ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) { // White Pawns
+			if row == s.row-2 && col == s.col {
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]-16] = inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]]
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]] = PieceDescription{}
+				s = &selectedPiece{Piece: 0, row: 0, col: 0, color: ""}
+			} else if row == s.row-1 && col == s.col {
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]-8] = inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]]
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]] = PieceDescription{}
+				s = &selectedPiece{Piece: 0, row: 0, col: 0, color: ""}
+			}
+
+		}
+		if s.color == "black" && ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) { // Black Pawns
+			if row == s.row+2 && col == s.col {
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]+16] = inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]]
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]] = PieceDescription{}
+				s = &selectedPiece{Piece: 0, row: 0, col: 0, color: ""}
+			} else if row == s.row+1 && col == s.col {
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]+8] = inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]]
+				inf.consoleRepresentation[posMap[RowCol{row: s.row, col: s.col}]] = PieceDescription{}
+				s = &selectedPiece{Piece: 0, row: 0, col: 0, color: ""}
+			}
+		}
+	}
+}
+
+func (inf *BoardDimension) highlightPawnMove(screen ebiten.Image) {
+	/*
+		1. Check who move it is White or black
+		2. Check if king is in check
+	*/
+}
+
+type selectedPiece struct {
+	Piece    PieceType
+	row, col int
+	color    string
+}
+
+func (inf BoardDimension) updateCurrentPiece(row, col int, s *selectedPiece) {
+	if (inf.isFieldNotEmpty(posMap[RowCol{row: row, col: col}])) && ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
+		// Highlight Piece
+		s.Piece = inf.consoleRepresentation[posMap[RowCol{row: row, col: col}]].PieceName
+		s.color = inf.consoleRepresentation[posMap[RowCol{row: row, col: col}]].color
+		s.row = row
+		s.col = col
+	}
+}

@@ -32,7 +32,6 @@ var (
 )
 
 func (g *Game) Update() error {
-
 	return nil
 }
 
