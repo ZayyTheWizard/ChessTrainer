@@ -9,7 +9,7 @@ import (
 )
 
 type Game struct {
-	board BoardDimension
+	// board BoardDimension
 }
 
 var (

@@ -1,7 +1,6 @@
 package gamemain
 
 import (
-	"fmt"
 	"image/color"
 	"math"
 
@@ -19,11 +18,12 @@ type BoardDimension struct {
 var (
 	row, col     int
 	currentPiece = selectedPiece{}
+	gameTurn     = "white"
 )
 
 func (inf *BoardDimension) updateBoard(screen *ebiten.Image) error {
 	row, col = inf.mouseLoc(screen)
-	inf.gameLogic(screen, &currentPiece)
+	inf.gameLogic(screen, &currentPiece, &gameTurn)
 	return nil
 }
 
@@ -65,5 +65,5 @@ func (inf *BoardDimension) drawBoard(screen *ebiten.Image) {
 
 		}
 	}
-	fmt.Println(currentPiece)
+	// fmt.Println(currentPiece)
 }
